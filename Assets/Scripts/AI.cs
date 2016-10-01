@@ -15,21 +15,20 @@ public class AI : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		enemies = GameObject.FindGameObjectsWithTag ("Ball");
-		if (Mathf.Sqrt(Mathf.Pow(transform.position.x, 2) + Mathf.Pow(transform.position.z, 2)) > (fieldRadius*.43f)) {
+		if (Mathf.Sqrt(Mathf.Pow(transform.position.x, 2) + Mathf.Pow(transform.position.z, 2)) > (fieldRadius*.43f)) { //if this ball is near edge of the arena
 			target = GameObject.Find ("Field");
-			//print(Vector3.Distance (transform.position, Vector3.zero));
 		} 
 		else {
 			target = FindClosestBall (enemies);
 		}
-		heading = Vector3.Normalize (target.transform.position - transform.position);
+		heading = Vector3.Normalize (target.transform.position - transform.position); //determine direction for next movement
 		transform.GetComponent<Rigidbody> ().AddForce(heading * 5f);
 	}
 
 	GameObject FindClosestBall(GameObject[] enemies){
 		float min = Mathf.Infinity;
 		GameObject tar = null;
-		foreach (GameObject enemy in enemies) {
+		foreach (GameObject enemy in enemies) { //determine closest enemy
 			if (enemy.name != transform.gameObject.name) {
 				float dist = Vector3.Distance (enemy.transform.position, transform.position);
 				if (dist < min) {
@@ -38,7 +37,7 @@ public class AI : MonoBehaviour {
 				}
 			}
 		}
-		if (tar == null) {
+		if (tar == null) { //if no nearby enemy AKA game end have ball return to center
 			tar = GameObject.Find ("Field");
 		}
 		return tar;

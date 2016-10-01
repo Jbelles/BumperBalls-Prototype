@@ -10,8 +10,10 @@ public class SmallBallController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+		//Again this should be called when a ball is destroyed and not in Fixed Update but I am probably passing my 8 hour limit
 		if (transform.position.y < 0) {
 			Color color = transform.GetComponent<Renderer>().material.color;
+			//splits ball int 4 smaller balls, the upwards Addforce doesnt do much here, but can be used if you want a delay between first and second splits
 			for (int i = -1; i < 2; i++)
 				for (int j = -1; j < 2; j++) {
 					if (i != 0 && j != 0) {

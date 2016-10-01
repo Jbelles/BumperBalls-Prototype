@@ -12,7 +12,7 @@ public class GameController : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void FixedUpdate () {
-
+		//activate/deactivate UI based on game state (this probably should be called when a ball is destroyed instead of in fixed update for efficiency but I don't want to push my time limit)
 		if (GameObject.FindGameObjectsWithTag ("Ball").Length <= 1 && GameObject.Find ("Player") != null) {
 			panel.SetActive (true);
 			Color temp = Color.green;
